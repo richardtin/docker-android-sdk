@@ -7,7 +7,7 @@ RUN apt-get update -qqy && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install Android Commandline Tools
-ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip
+ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
 ARG android_home=/opt/android/sdk
 
 # SHA-256 87f6dcf41d4e642e37ba03cb2e387a542aa0bd73cb689a9e7152aad40a6e7a08

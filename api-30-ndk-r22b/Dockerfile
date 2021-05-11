@@ -6,4 +6,4 @@ RUN sdkmanager \
     "cmake;3.10.2.4988404" \
     "cmake;3.6.4111459"
 RUN sdkmanager \
-    "ndk;21.3.6528147"
+    "ndk;22.1.7171670"
