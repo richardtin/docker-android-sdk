@@ -10,7 +10,7 @@ RUN apt-get update -qqy && \
 ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip
 ARG android_home=/opt/android/sdk
 
-# SHA-256 87f6dcf41d4e642e37ba03cb2e387a542aa0bd73cb689a9e7152aad40a6e7a08
+# SHA-256 7a00faadc0864f78edd8f4908a629a46d622375cbe2e5814e82934aebecdb622
 
 RUN mkdir -p ${android_home}/cmdline-tools && \
     wget -O /tmp/cmdline-tools.zip -t 5 "${cmdline_tools}" && \
