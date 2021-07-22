@@ -43,3 +43,4 @@ jobs:
           context: base
           push: true
           tags: base
+          labels: ${{ steps.meta.outputs.labels }}
