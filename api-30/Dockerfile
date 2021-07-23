@@ -1,4 +1,4 @@
-FROM richardtin/docker-android-sdk:base
+FROM ghcr.io/richardtin/docker-android-sdk:base
 
 RUN sdkmanager \
     "build-tools;30.0.3" \

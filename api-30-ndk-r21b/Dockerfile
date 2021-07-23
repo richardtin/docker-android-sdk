@@ -1,4 +1,4 @@
-FROM richardtin/docker-android-sdk:api-30
+FROM ghcr.io/richardtin/docker-android-sdk:api-30
 
 # Update SDK manager and install system image, platform and build tools
 RUN sdkmanager \
