@@ -49,6 +49,15 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30
           cache-to: type=inline
 
+      - name: Build and push api-30-ndk-r21d image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: api-30-ndk-r21d
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r22b
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r21d
+          cache-to: type=inline
+
       - name: Build and push api-30-ndk-r22b image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
