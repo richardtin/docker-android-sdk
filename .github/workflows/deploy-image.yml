@@ -40,10 +40,10 @@ jobs:
         with:
           context: base
           file: base/Dockerfile
-          load: true
+          push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base,mode=max
+          cache-to: type=inline
 
       - name: Build and push api-30 image
         uses: docker/build-push-action@v2
@@ -53,17 +53,7 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base,mode=max
-
-      - name: Build and push api-30-ndk-r21d image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-30-ndk-r21d
-          file: api-20-ndk-r21d/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r21d
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r21d
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base,mode=max
+          cache-to: type=inline
 
       - name: Build and push api-30-ndk-r22b image
         uses: docker/build-push-action@v2
@@ -73,4 +63,4 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r22b
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r22b
-          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base,mode=max
+          cache-to: type=inline
