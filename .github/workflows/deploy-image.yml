@@ -41,7 +41,6 @@ jobs:
           context: base
           file: base/Dockerfile
           load: true
-          push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
           cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base,mode=max
@@ -51,7 +50,6 @@ jobs:
         with:
           context: api-30
           file: api-30/Dockerfile
-          load: true
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30
@@ -62,7 +60,6 @@ jobs:
         with:
           context: api-30-ndk-r21d
           file: api-20-ndk-r21d/Dockerfile
-          load: true
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r21d
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r21d
@@ -73,7 +70,6 @@ jobs:
         with:
           context: api-30-ndk-r22b
           file: api-30-ndk-r22b/Dockerfile
-          load: true
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r22b
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r22b
