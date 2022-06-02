@@ -45,52 +45,32 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
           cache-to: type=inline
 
-      - name: Build and push api-30 image
+      - name: Build and push api-32 image
         uses: docker/build-push-action@v2
         with:
-          context: api-30
-          file: api-30/Dockerfile
+          context: api-32
+          file: api-32/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32
           cache-to: type=inline
 
-      - name: Build and push api-30-ndk-r21d image
+      - name: Build and push api-32-ndk-r23b image
         uses: docker/build-push-action@v2
         with:
-          context: api-30-ndk-r21d
-          file: api-30-ndk-r21d/Dockerfile
+          context: api-32-ndk-r23b
+          file: api-32-ndk-r23b/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r21d
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r21d
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23b
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23b
           cache-to: type=inline
 
-      - name: Build and push api-30-ndk-r22b image
+      - name: Build and push api-32-ndk-r23c image
         uses: docker/build-push-action@v2
         with:
-          context: api-30-ndk-r22b
-          file: api-30-ndk-r22b/Dockerfile
+          context: api-32-ndk-r23c
+          file: api-32-ndk-r23c/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r22b
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-30-ndk-r22b
-          cache-to: type=inline
-
-      - name: Build and push api-31 image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-31
-          file: api-31/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-31
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-31
-          cache-to: type=inline
-
-      - name: Build and push api-31-ndk-r23b image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-31-ndk-r23b
-          file: api-31-ndk-r23b/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-31-ndk-r23b
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-31-ndk-r23b
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23c
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23c
           cache-to: type=inline
