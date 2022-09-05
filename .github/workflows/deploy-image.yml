@@ -45,36 +45,6 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
           cache-to: type=inline
 
-      - name: Build and push api-32 image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-32
-          file: api-32/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32
-          cache-to: type=inline
-
-      - name: Build and push api-32-ndk-r23b image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-32-ndk-r23b
-          file: api-32-ndk-r23b/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23b
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23b
-          cache-to: type=inline
-
-      - name: Build and push api-32-ndk-r23c image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-32-ndk-r23c
-          file: api-32-ndk-r23c/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23c
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-32-ndk-r23c
-          cache-to: type=inline
-
       - name: Build and push api-33 image
         uses: docker/build-push-action@v2
         with:
@@ -93,4 +63,14 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r24a
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r24a
+          cache-to: type=inline
+
+      - name: Build and push api-33-ndk-r25b image
+        uses: docker/build-push-action@v2
+        with:
+          context: api-33-ndk-r25b
+          file: api-33-ndk-r25b/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r25b
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r25b
           cache-to: type=inline
