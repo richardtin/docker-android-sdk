@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-buster
+FROM openjdk:17-jdk-bullseye
 
 RUN apt-get update -qqy && \
     apt-get install -qqy \
@@ -7,10 +7,10 @@ RUN apt-get update -qqy && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install Android Commandline Tools
-ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip
+ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
 ARG android_home=/opt/android/sdk
 
-# SHA-256 5e7bf2dd563d34917d32f3c5920a85562a795c93
+# SHA-256 bd1aa17c7ef10066949c88dc6c9c8d536be27f992a1f3b5a584f9bd2ba5646a0
 
 RUN mkdir -p ${android_home}/cmdline-tools && \
     wget -O /tmp/cmdline-tools.zip -t 5 "${cmdline_tools}" && \
@@ -34,7 +34,7 @@ RUN sdkmanager \
     "platform-tools" \
     "patcher;v4"
 
-COPY rootfs /
+COPY ../rootfs /
 
 WORKDIR /app
 ENTRYPOINT ["/app-entrypoint.sh"]

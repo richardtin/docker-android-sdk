@@ -6,9 +6,7 @@
 name: Create and publish a Docker image
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
@@ -35,42 +33,52 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push base image
+      - name: Build and push base jdk 11 image
         uses: docker/build-push-action@v2
         with:
           context: base
-          file: base/Dockerfile
+          file: base/11/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-11
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-11
           cache-to: type=inline
 
-      - name: Build and push api-33 image
+      - name: Build and push base jdk 17 image
         uses: docker/build-push-action@v2
         with:
-          context: api-33
-          file: api-33/Dockerfile
+          context: base
+          file: base/17/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-17
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-17
           cache-to: type=inline
 
-      - name: Build and push api-33-ndk-r24a image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-33-ndk-r24a
-          file: api-33-ndk-r24a/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r24a
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r24a
-          cache-to: type=inline
+      # - name: Build and push api-34 image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: api-34
+      #     file: api-34/Dockerfile
+      #     push: true
+      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34
+      #     cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34
+      #     cache-to: type=inline
 
-      - name: Build and push api-33-ndk-r25b image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-33-ndk-r25b
-          file: api-33-ndk-r25b/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r25b
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-33-ndk-r25b
-          cache-to: type=inline
+      # - name: Build and push api-34-ndk-r25b image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: api-34-ndk-r25b
+      #     file: api-34-ndk-r25b/Dockerfile
+      #     push: true
+      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34-ndk-r25b
+      #     cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34-ndk-r25b
+      #     cache-to: type=inline
+
+      # - name: Build and push api-34-ndk-r25c image
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: api-34-ndk-r25c
+      #     file: api-34-ndk-r25c/Dockerfile
+      #     push: true
+      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34-ndk-r25c
+      #     cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34-ndk-r25c
+      #     cache-to: type=inline
