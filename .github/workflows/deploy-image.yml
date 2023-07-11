@@ -53,15 +53,25 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-17
           cache-to: type=inline
 
-      # - name: Build and push api-34 image
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: api-34
-      #     file: api-34/Dockerfile
-      #     push: true
-      #     tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34
-      #     cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:api-34
-      #     cache-to: type=inline
+      - name: Build and push jdk-11-api-34 image
+        uses: docker/build-push-action@v2
+        with:
+          context: api-34
+          file: api-34/11/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34
+          cache-to: type=inline
+
+      - name: Build and push jdk-17-api-34 image
+        uses: docker/build-push-action@v2
+        with:
+          context: api-34
+          file: api-34/17/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34
+          cache-to: type=inline
 
       # - name: Build and push api-34-ndk-r25b image
       #   uses: docker/build-push-action@v2
