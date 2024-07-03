@@ -1,13 +1,13 @@
-FROM openjdk:11-jdk-bullseye
+FROM eclipse-temurin:11-jdk-jammy
 
 RUN apt-get update -qqy && \
     apt-get install -qqy \
         lib32stdc++6 lib32z1 build-essential libcurl4-openssl-dev \
-        libglu1-mesa libglu1-mesa-dev && \
+        libglu1-mesa libglu1-mesa-dev unzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install Android Commandline Tools
-ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
 ARG android_home=/opt/android/sdk
 
 # SHA-256 bd1aa17c7ef10066949c88dc6c9c8d536be27f992a1f3b5a584f9bd2ba5646a0
@@ -31,8 +31,7 @@ RUN yes | sdkmanager --licenses && yes | sdkmanager --update
 # Update SDK manager and install system image, platform and build tools
 RUN sdkmanager \
     "emulator" \
-    "platform-tools" \
-    "patcher;v4"
+    "platform-tools"
 
 COPY ../rootfs /
 

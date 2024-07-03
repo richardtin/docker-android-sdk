@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
 
       - name: Log in to the Container registry
         uses: docker/login-action@v1
@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push base jdk 11 image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           context: base
           file: base/11/Dockerfile
@@ -44,7 +44,7 @@ jobs:
           cache-to: type=inline
 
       - name: Build and push base jdk 17 image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           context: base
           file: base/17/Dockerfile
@@ -53,62 +53,42 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-17
           cache-to: type=inline
 
-      - name: Build and push jdk-11-api-34 image
-        uses: docker/build-push-action@v2
+      - name: Build and push jdk-11-api-35 image
+        uses: docker/build-push-action@v6
         with:
-          context: api-34
-          file: api-34/11/Dockerfile
+          context: api-35
+          file: api-35/11/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35
           cache-to: type=inline
 
-      - name: Build and push jdk-17-api-34 image
-        uses: docker/build-push-action@v2
+      - name: Build and push jdk-17-api-35 image
+        uses: docker/build-push-action@v6
         with:
-          context: api-34
-          file: api-34/17/Dockerfile
+          context: api-35
+          file: api-35/17/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35
           cache-to: type=inline
 
-      - name: Build and push jdk-11-api-34-ndk-r25b image
-        uses: docker/build-push-action@v2
+      - name: Build and push jdk-11-api-35-ndk-r26c image
+        uses: docker/build-push-action@v6
         with:
-          context: api-34-ndk-r25b
-          file: api-34-ndk-r25b/11/Dockerfile
+          context: api-35-ndk-r26c
+          file: api-35-ndk-r26c/11/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34-ndk-r25b
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34-ndk-r25b
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35-ndk-r26c
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35-ndk-r26c
           cache-to: type=inline
 
-      - name: Build and push jdk-17-api-34-ndk-r25b image
-        uses: docker/build-push-action@v2
+      - name: Build and push jdk-17-api-35-ndk-r26c image
+        uses: docker/build-push-action@v6
         with:
-          context: api-34-ndk-r25b
-          file: api-34-ndk-r25b/17/Dockerfile
+          context: api-35-ndk-r26c
+          file: api-35-ndk-r26c/17/Dockerfile
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34-ndk-r25b
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34-ndk-r25b
-          cache-to: type=inline
-
-      - name: Build and push jdk-11-api-34-ndk-r25c image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-34-ndk-r25c
-          file: api-34-ndk-r25c/11/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34-ndk-r25c
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-34-ndk-r25c
-          cache-to: type=inline
-
-      - name: Build and push jdk-17-api-34-ndk-r25c image
-        uses: docker/build-push-action@v2
-        with:
-          context: api-34-ndk-r25c
-          file: api-34-ndk-r25c/17/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34-ndk-r25c
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-34-ndk-r25c
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35-ndk-r26c
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35-ndk-r26c
           cache-to: type=inline
