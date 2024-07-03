@@ -33,16 +33,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push base jdk 11 image
-        uses: docker/build-push-action@v6
-        with:
-          context: base
-          file: base/11/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-11
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-11
-          cache-to: type=inline
-
       - name: Build and push base jdk 17 image
         uses: docker/build-push-action@v6
         with:
@@ -53,16 +43,6 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-17
           cache-to: type=inline
 
-      - name: Build and push jdk-11-api-35 image
-        uses: docker/build-push-action@v6
-        with:
-          context: api-35
-          file: api-35/11/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35
-          cache-to: type=inline
-
       - name: Build and push jdk-17-api-35 image
         uses: docker/build-push-action@v6
         with:
@@ -71,16 +51,6 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35
-          cache-to: type=inline
-
-      - name: Build and push jdk-11-api-35-ndk-r26c image
-        uses: docker/build-push-action@v6
-        with:
-          context: api-35-ndk-r26c
-          file: api-35-ndk-r26c/11/Dockerfile
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35-ndk-r26c
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-11-api-35-ndk-r26c
           cache-to: type=inline
 
       - name: Build and push jdk-17-api-35-ndk-r26c image
