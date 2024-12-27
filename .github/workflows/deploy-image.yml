@@ -53,6 +53,16 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35
           cache-to: type=inline
 
+      - name: Build and push jdk-17-api-35-ndk-r25b image
+        uses: docker/build-push-action@v6
+        with:
+          context: api-35-ndk-r25b
+          file: api-35-ndk-r25b/17/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35-ndk-r25b
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-35-ndk-r25b
+          cache-to: type=inline
+
       - name: Build and push jdk-17-api-35-ndk-r26c image
         uses: docker/build-push-action@v6
         with:
