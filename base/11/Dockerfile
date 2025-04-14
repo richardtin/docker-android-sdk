@@ -1,19 +1,20 @@
 FROM eclipse-temurin:11-jdk-jammy
 
 RUN apt-get update -qqy && \
-    apt-get install -qqy \
+    apt-get install -qqy --no-install-recommends \
         lib32stdc++6 lib32z1 build-essential libcurl4-openssl-dev \
         libglu1-mesa libglu1-mesa-dev unzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install Android Commandline Tools
-ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
 ARG android_home=/opt/android/sdk
 
 # SHA-256 bd1aa17c7ef10066949c88dc6c9c8d536be27f992a1f3b5a584f9bd2ba5646a0
 
 RUN mkdir -p ${android_home}/cmdline-tools && \
     wget -O /tmp/cmdline-tools.zip -t 5 "${cmdline_tools}" && \
+    echo "7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee /tmp/cmdline-tools.zip" | sha256sum -c - && \
     unzip -q /tmp/cmdline-tools.zip -d ${android_home}/cmdline-tools && \
     mv ${android_home}/cmdline-tools/cmdline-tools ${android_home}/cmdline-tools/latest && \
     rm /tmp/cmdline-tools.zip
