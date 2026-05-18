@@ -7,14 +7,14 @@ RUN apt-get update -qqy && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install Android Commandline Tools
-ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-14742923_latest.zip
 ARG android_home=/opt/android/sdk
 
-# SHA-256 bd1aa17c7ef10066949c88dc6c9c8d536be27f992a1f3b5a584f9bd2ba5646a0
+# SHA-256 04453066b540409d975c676d781da1477479dde3761310f1a7eb92a1dfb15af7
 
 RUN mkdir -p ${android_home}/cmdline-tools && \
     wget -O /tmp/cmdline-tools.zip -t 5 "${cmdline_tools}" && \
-    echo "7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee /tmp/cmdline-tools.zip" | sha256sum -c - && \
+    echo "04453066b540409d975c676d781da1477479dde3761310f1a7eb92a1dfb15af7 /tmp/cmdline-tools.zip" | sha256sum -c - && \
     unzip -q /tmp/cmdline-tools.zip -d ${android_home}/cmdline-tools && \
     mv ${android_home}/cmdline-tools/cmdline-tools ${android_home}/cmdline-tools/latest && \
     rm /tmp/cmdline-tools.zip
