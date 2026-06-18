@@ -42,3 +42,13 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-37-ndk-r28c
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-37-ndk-r28c
           cache-to: type=inline
+
+      - name: Build and push jdk-21-api-37-ndk-r28c image
+        uses: docker/build-push-action@v6
+        with:
+          context: api-37-ndk-r28c
+          file: api-37-ndk-r28c/21/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-21-api-37-ndk-r28c
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-21-api-37-ndk-r28c
+          cache-to: type=inline

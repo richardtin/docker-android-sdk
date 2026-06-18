@@ -42,3 +42,13 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-37
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-17-api-37
           cache-to: type=inline
+
+      - name: Build and push jdk-21-api-37 image
+        uses: docker/build-push-action@v6
+        with:
+          context: api-37
+          file: api-37/21/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-21-api-37
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:jdk-21-api-37
+          cache-to: type=inline

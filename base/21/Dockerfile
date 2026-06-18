@@ -1,0 +1,41 @@
+FROM eclipse-temurin:21-jdk-noble
+
+RUN apt-get update -qqy && \
+    apt-get install -qqy --no-install-recommends \
+        lib32stdc++6 lib32z1 build-essential libcurl4-openssl-dev \
+        libglu1-mesa libglu1-mesa-dev unzip ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+# Download and install Android Commandline Tools
+ARG cmdline_tools=https://dl.google.com/android/repository/commandlinetools-linux-14742923_latest.zip
+ARG android_home=/opt/android/sdk
+
+# SHA-256 04453066b540409d975c676d781da1477479dde3761310f1a7eb92a1dfb15af7
+
+RUN mkdir -p ${android_home}/cmdline-tools && \
+    wget -O /tmp/cmdline-tools.zip -t 5 "${cmdline_tools}" && \
+    echo "04453066b540409d975c676d781da1477479dde3761310f1a7eb92a1dfb15af7 /tmp/cmdline-tools.zip" | sha256sum -c - && \
+    unzip -q /tmp/cmdline-tools.zip -d ${android_home}/cmdline-tools && \
+    mv ${android_home}/cmdline-tools/cmdline-tools ${android_home}/cmdline-tools/latest && \
+    rm /tmp/cmdline-tools.zip
+
+# Set environmental variables
+ENV ANDROID_HOME ${android_home}
+ENV ANDROID_SDK_ROOT ${android_home}
+ENV ADB_INSTALL_TIMEOUT 120
+ENV PATH ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${ANDROID_SDK_ROOT}/platform-tools:${PATH}
+
+RUN mkdir ~/.android && echo '### User Sources for Android SDK Manager' > ~/.android/repositories.cfg
+
+RUN yes | sdkmanager --licenses && yes | sdkmanager --update
+
+# Update SDK manager and install system image, platform and build tools
+RUN sdkmanager \
+    "emulator" \
+    "platform-tools"
+
+COPY ../rootfs /
+
+WORKDIR /app
+ENTRYPOINT ["/app-entrypoint.sh"]
+CMD ["./gradlew", "tasks"]

@@ -42,3 +42,13 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-17
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-17
           cache-to: type=inline
+
+      - name: Build and push base jdk 21 image
+        uses: docker/build-push-action@v6
+        with:
+          context: base
+          file: base/21/Dockerfile
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-21
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:base-jdk-21
+          cache-to: type=inline
