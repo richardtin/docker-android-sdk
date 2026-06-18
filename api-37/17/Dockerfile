@@ -39,7 +39,7 @@ RUN sdkmanager \
     "build-tools;27.0.1" \
     "build-tools;27.0.0"
 RUN sdkmanager \
-    "platforms;android-37" \
+    "platforms;android-37.0" \
     "platforms;android-36" \
     "platforms;android-35" \
     "platforms;android-34" \
